@@ -1,5 +1,5 @@
 """
- * Copyright (C) 2022 ae-web by Alexandria Eicher. All Rights Reserved.
+ * Copyright (C) 2022 run.py by Alexandria Eicher. All Rights Reserved.
  * 
  * This product includes software developed by Alexandria Eicher for 
  * private, personal use. This software is protected by U.S. and international
@@ -13,6 +13,7 @@
  """
 
 import sys
+# prevents __pycache__ file from being written to commands dir
 sys.dont_write_bytecode = True
 from os import listdir
 import importlib.util
@@ -47,8 +48,9 @@ class CommandProcessor:
             lines = this_file.readlines()
             command = self.createCommand(lines)
             command.filename = path_to_file
-            self.commands[str(count)] = command
-            count += 1
+            if (command.description != ""):
+                self.commands[str(count)] = command
+                count += 1
 
     def createCommand(self, lines):
         program_name = ""
